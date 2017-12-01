@@ -1,0 +1,9 @@
+{
+	"name": "PongJS",
+	"version": "1.0.0",
+	"description": "PonGJS Multiplayer",
+	"dependencies": {
+		"express": "^4.15.2",
+		"socket.io": "^2.0.4"
+	}
+}

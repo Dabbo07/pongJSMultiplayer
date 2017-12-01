@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+		<script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+		<script src="/socket.io/socket.io.js"></script>
+		<script src="/app.js"></script>
+		<style>
+			#mainCanvas {
+				border:1px dashed black;
+				cursor: none;
+			}
+			#userDetail, #gameList, #canvasSection, #hostWaiting {
+				display: none;
+			}
+			.userListTitle, .gameListTitle {
+				margin-top: 15px;
+				border-top: 1px solid black;
+				border-bottom: 1px solid black;
+			}
+			.userListHeaders, .gameListHeaders {
+				border-bottom: 1px dashed black;
+				font-weight: bold;
+			}
+			.userListItem:hover {
+				background-color: #d0d0d0;
+			}
+		</style>
+	</head>
+	<body onload="clientStart()">
+	
+		<ul id="socketData">
+		</ul>
+	
+		<div class="container">
+
+			<div class="row" id="loginForm">
+				<br/>
+				<div class="form-inline">
+					<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+						<div class="input-group-addon">Name</div>
+						<input type="text" class="form-control" id="userName" placeholder="Username">
+					</div>
+					<div class="input-group mb-2 mr-sm-2 mb-sm-0">
+						<button id="btnLogin" class="btn btn-primary" onclick="loginUser()">Sign-in</button>
+					</div>
+				</div>
+			</div>
+
+			<div class="row" >
+				<div class="col-md-6">
+					<div id="userDetail">
+						<div class="row">
+							<div class="col-md-7">
+								<h5>User: <small class="userNameDisplay"></small></h4>
+							</div>
+							<div class="col-md-5">
+								<div class="pull-right">
+									<button class="btn btn-danger" onclick="logoutUser()">Log off</button>
+									<button class="btn btn-info" onclick="createGame()">Create Game</button>
+								</div>
+							</div>
+						</div>
+						<div class="row userListTitle">
+							<div class="col-md-12">
+								<h5>Current Users</h5>
+							</div>
+						</div>
+						<div class="row userListHeaders">
+							<div class="col-md-8">User</div>
+							<div class="col-md-4">Status</div>
+						</div>
+						<div id="userListSection">
+						</div>
+					</div>
+				</div>
+				
+				<div class="col-md-6">
+					<div id="gameList">
+						<div class="row">
+							<div class="col-md-12">
+								<h5>G List</h4>
+							</div>
+						</div>
+						<div class="row gameListHeaders">
+							<div class="col-md-4">Game</div>
+							<div class="col-md-3">Score</div>
+							<div class="col-md-2">Status</div>
+							<div class="col-md-3">Action</div>
+						</div>
+						<div id="gameListSection">
+						</div>
+					</div>
+				</div>
+			</div>
+		
+			<div class="row" id="hostWaiting">
+				<div class="col-md-10">
+					<h5>Waiting for user <small class="gameIdDisplay"></small></h5>
+				</div>
+				<div class="col-md-2">
+					<div class="pull-right">
+						<button class="btn btn-danger" onclick="cancelGame()">Cancel</button>
+					</div>
+				</div>
+			</div>
+		
+			<div class="row" id="canvasSection">
+				<div class="col-md-12" align="center">
+					<canvas id="mainCanvas" height="600" width="800"></canvas>
+				</div>
+				<div class="col-md-12" align="center">
+					<button class="btn btn-danger" onclick="quitGame()">Quit</button>
+				</div>
+			</div>
+			
+		</div>
+		
+	</body>
+</html>
